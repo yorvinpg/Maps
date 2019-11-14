@@ -52,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(libreria).title("Libreria"));
         mMap.addMarker(new MarkerOptions().position(jugos).title("Jugos"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(autonoma));
+        
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
