@@ -2,13 +2,18 @@ package com.example.mapsfinal;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,8 +45,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng autonoma = new LatLng(-12.195483, -76.9719602);
+        LatLng libreria = new LatLng(-12.1950265, -76.9716449);
+        LatLng jugos    = new LatLng(-12.1963635, -76.9721322);
+        mMap.addMarker(new MarkerOptions().position(autonoma).title("Universidad Autonoma"));
+        mMap.addMarker(new MarkerOptions().position(libreria).title("Libreria"));
+        mMap.addMarker(new MarkerOptions().position(jugos).title("Jugos"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(autonoma));
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.getTitle().equals("Jugos")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/maps/search/Jugos/@-12.1947386,-76.9710182,17z"));
+                    startActivity(intent);
+                }
+                if (marker.getTitle().equals("Libreria")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/maps/search/Jugos/@-12.1947386,-76.9710182,17z"));
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
+
+
 }
